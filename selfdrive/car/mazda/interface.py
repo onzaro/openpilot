@@ -59,7 +59,8 @@ class CarInterface(object):
     # TODO: gate this on detection
     ret.enableCamera = True
 
-    std_cargo = 136
+    # std_cargo = 136
+    std_cargo = 350
     # hardcoding honda civic 2016 touring params so they can be used to
     # scale unknown params for other cars
     mass_civic = 2923./2.205 + std_cargo
@@ -72,10 +73,13 @@ class CarInterface(object):
 
     if candidate in [CAR.CX5]:
       stop_and_go = True
-      ret.mass =  3655 * CV.LB_TO_KG + std_cargo
-      ret.wheelbase = 2.7
+      # ret.mass =  3655 * CV.LB_TO_KG + std_cargo CX-5
+      ret.mass =  4361 * CV.LB_TO_KG + std_cargo
+      # ret.wheelbase = 2.7 CX-5
+      ret.wheelbase = 2.93
       ret.centerToFront = ret.wheelbase * 0.41
-      ret.steerRatio = 15.5
+      # ret.steerRatio = 15.5 CX-5
+      ret.steerRatio = 17.6
       ret.steerKf = 0.00004
       ret.steerKiBP, ret.steerKpBP = [[0.], [0.]]
       ret.steerKpV, ret.steerKiV = [[0.2], [0.18]]
@@ -134,7 +138,7 @@ class CarInterface(object):
 
     self.pt_cp.update(int(sec_since_boot() * 1e9), False)
     self.cam_cp.update(int(sec_since_boot() * 1e9), False)
-    
+
     self.CS.update(self.pt_cp, self.cam_cp)
 
     # create message
